@@ -1,0 +1,58 @@
+CREATE TABLE users(  
+  Id SERIAL PRIMARY KEY,
+  Username VARCHAR(255) NOT NULL,
+  PasswordHash TEXT NOT NULL,
+  Salt TEXT NOT NULL,
+  Email VARCHAR(256) NOT NULL,
+  EmailConfirmed BOOLEAN NOT NULL DEFAULT false,
+  MobilePhone TEXT NULL,
+  MobilePhoneConfirmed BOOLEAN NOT NULL DEFAULT false,
+  TwoFactorEnabled BOOLEAN NOT NULL DEFAULT false,
+  AccessFailedCount INT NOT NULL DEFAULT 0,
+  LockoutEnd TIMESTAMP NULL,
+  LockoutEnabled BOOLEAN NOT NULL DEFAULT false
+);
+
+------------------
+
+CREATE TABLE Profile (
+  Id SERIAL PRIMARY KEY,
+  FullName VARCHAR(256) NOT NULL,
+  LastAccess TIMESTAMP NOT NULL,
+  User_Id INT NOT NULL,
+  CONSTRAINT fk_Profile_User
+      FOREIGN KEY(User_Id) 
+	  REFERENCES Users(Id)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION    
+);
+
+
+--------------------------
+
+CREATE TABLE Role ( --  IF NOT EXISTS
+  Id SERIAL PRIMARY KEY,
+  RoleName VARCHAR(256) NOT NULL
+);
+
+
+---------------------
+
+CREATE TABLE UserRoles ( 
+  Id SERIAL,  
+  User_Id INT NOT NULL,
+  Role_Id INT NOT NULL,
+  PRIMARY KEY (Id, User_Id, Role_Id),
+  CONSTRAINT fk_UserRoles_User1
+      FOREIGN KEY(User_Id) 
+        REFERENCES users(Id)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION,
+   CONSTRAINT fk_UserRoles_Role1
+      FOREIGN KEY(Role_Id) 
+        REFERENCES Role(Id)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION
+   );
+--------------------------
+
