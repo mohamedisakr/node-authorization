@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>A Simple Udemy Application</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <p class="h5 my-0 me-md-auto fw-normal">Ilmu Data</p>
+        <nav class="my-2 my-md-0 me-md-3">
+            <a class="p-2 text-dark" href="/">Home</a>
+            <a class="p-2 text-dark" href="/users/myprofile">My Profile</a>
+            <a class="p-2 text-dark" href="/manager/myprofile">Manager</a>
+            <a class="p-2 text-dark" href="/manager/dashboard">Dashboard</a>
+            <a class="p-2 text-dark" href="/admin/myprofile">Admin</a>
+            <a class="p-2 text-dark" href="/about">About</a>
+        </nav>
+        {{#if isLogin}}
+            <a class="btn btn-outline-primary" href="/account/logout">Logout</a>
+        {{else}}
+            <a class="btn btn-outline-primary" href="/account/register">Register</a>
+        {{/if}}
+        
+    </header>
+
+    <main class="container">
+        {{{body}}}
+        <footer class="pt-4 my-md-5 pt-md-5 border-top">
+            <div class="row">
+                <small class="d-block mb-3 text-muted">&copy; Ilmu Data 2021</small>             
+            </div>
+        </footer>
+    </main>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

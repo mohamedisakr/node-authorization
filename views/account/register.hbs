@@ -1,0 +1,68 @@
+<h4>Register</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        {{#if isError}}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{#if ErrorMessage}}
+            {{ErrorMessage}}
+            {{else}}
+            There is any error while registering a new user.
+            {{/if}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
+
+        <form action="/account/register" method="post" class="needs-validation" novalidate>
+            <div class="form-group">
+                <label for="Username" class="form-label">User name</label>
+                <input class="form-control" name="Username" value="{{model.Username}}" minlength="5" required />
+            </div>
+            <div class="form-group">
+                <label for="FullName" class="form-label">Full Name</label>
+                <input name="FullName" class="form-control" value="{{model.FullName}}" required />
+            </div>
+            <div class="form-group ">
+                <label for="Email" class="form-label">Email</label>
+                <input name="Email" class="form-control" value="{{model.Email}}" required />
+            </div>
+            <div class="form-group">
+                <label for="Password" class="form-label">Password</label>
+                <input type="password" name="Password" minlength="5"  class="form-control" required />
+            </div>
+            {{#if useCaptcha}}
+            <div class="form-group">
+                <br>
+                <div class="g-recaptcha" data-sitekey="{{ReCaptchaKey}}"></div>
+            </div>
+            {{/if}}
+            <div class="form-group">
+                <br />
+                <input type="submit" value="Register" class="btn btn-primary" />
+                <a href="/account/login" class="btn btn-link">Have Account?</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script lang="JavaScript">
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    } else
+                        this.form.submit()
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
+<script src='https://www.google.com/recaptcha/api.js'></script>

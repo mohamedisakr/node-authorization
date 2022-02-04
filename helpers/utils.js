@@ -1,6 +1,6 @@
 const https = require('https')
 const nodemailer = require('nodemailer')
-const config = require('../appconfig')
+const config = require('../config')
 
 module.exports.validateCaptcha = (token, done) => {
   try {
